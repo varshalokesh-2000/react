@@ -1,18 +1,29 @@
- import React from "react";
- import ReactDOM from "react-dom/client";
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-const parent = React.createElement("div", { id: "parent" }, [
-  React.createElement("div", { id: "child1", key: "child1" }, [
-    React.createElement("h1", { key: "child1" }, "I am a child H1 tag!"),
-    React.createElement("h2", { key: "child2" }, "I am a child H2 tag!"),
-  ]),
-  React.createElement("div", { id: "child2", key: "child2" }, [
-    React.createElement("h1", { key: "child1" }, "I am a child H1 tag!"),
-    React.createElement("h2", { key: "child2" }, "I am a child H2 tag!"),
-  ]),
-]);
-console.log({ parent });
+//React.createElement => Object => HTMLElement(render)
 
+const heading = React.createElement("h1", { id: "heading" }, "Namaste React");
+
+//JSX is not HTML in JS , JSX is HTML like syntax
+//JSX => React.createElement => Object => HTMLElement(render)
+const jsxHeading = <h1 id="heading">Namaste React-iuAEGFI</h1>;
+
+//React Element
+const headingElement = <h1 id="heading">Namaste React-headingElement</h1>;
+
+//React Component
+const Title = () => <h1 className="heading">Namaste React-title</h1>;
+//Component composition
+const HeadingComponent = () => {
+  return (
+    <div id="container">
+      <Title />
+      <h1 id="heading">Namaste React-inside Heading component</h1>
+    </div>
+  );
+};
+console.log({ HeadingComponent, headingElement });
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(parent);
+root.render(<HeadingComponent />);
