@@ -86,3 +86,17 @@
   font-size: 18px;
   font-weight: 600;
 }
+
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.shimmer-card {
+  width: 15.5rem;
+  height: 400px;
+  background-color: #f0f0f0;
+  margin: 10px;
+  border-radius: 12px;
+}
