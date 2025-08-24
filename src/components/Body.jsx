@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { restList } from "../utils/constants";
 import ResturantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   const fetchData = async () => {
     const data = await fetch(
@@ -14,8 +15,11 @@ const Body = () => {
     setListOfRestaurants(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
+    setFilteredRestaurants(
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
-
+  console.log("Body rendered");
   useEffect(() => {
     fetchData();
   }, []);
@@ -30,25 +34,47 @@ const Body = () => {
 
   return (
     <div className="body">
-      {listOfRestaurants.length === 0 ? (
+      <div className="filter">
+        <div className="search">
+          <input
+            name="search"
+            type="text"
+            className="search-box"
+            placeholder="Search"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+          <button
+            onClick={() => {
+              const filteredList = listOfRestaurants.filter((rest) =>
+                rest.info.name.toLowerCase().includes(searchText)
+              );
+              setFilteredRestaurants(filteredList);
+            }}
+          >
+            Search
+          </button>
+        </div>
+        <div>
+          <button
+            className="filter-btn"
+            onClick={() => {
+              const filteredList = listOfRestaurants.filter(
+                (rest) => rest.info.avgRating > 4.3
+              );
+              setFilteredRestaurants(filteredList);
+            }}
+          >
+            Top Rated Restaurants
+          </button>
+        </div>
+      </div>
+      {filteredRestaurants.length === 0 ? (
         <Shimmer />
       ) : (
         <>
-          <div className="search">Search</div>
-          <div>
-            <button
-              onClick={() => {
-                const filteredList = restList.restaurants.filter(
-                  (rest) => rest.info.avgRating > 4.2
-                );
-                setListOfRestaurants(filteredList);
-              }}
-            >
-              Filter
-            </button>
-          </div>
           <div className="rest-container">
-            {listOfRestaurants.map((rest) => (
+            {filteredRestaurants.map((rest) => (
               <ResturantCard resData={rest} key={rest.info.id} />
             ))}
           </div>
