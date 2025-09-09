@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, Router, RouterProvider } from "react-router";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import About from "./components/About";
@@ -11,7 +11,8 @@ const AppLayout = () => {
   return (
     <div className="app">
       <Header />
-      <Body />
+      {/* <Outlet /> is used to render the child routes and is replaced by the component specified in the path */}
+      <Outlet />
     </div>
   );
 };
@@ -22,14 +23,20 @@ const appRouter = createBrowserRouter([
     path: "/",
     element: <AppLayout />,
     errorElement: <Error />,
-  },
-  {
-    path: "/about",
-    element: <About />,
-  },
-  {
-    path: "/contact",
-    element: <Contact />,
+    children: [
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+    ],
   },
 ]);
 
