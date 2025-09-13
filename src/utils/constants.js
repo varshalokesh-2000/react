@@ -4,6 +4,9 @@ export const CMS_URL =
 export const LOGO_URL =
   "https://www.logodesign.net/logo/smoking-burger-with-lettuce-3624ld.png";
 
+export const MENU_API =
+  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9591636&lng=77.5868218&restaurantId=";
+
 export const restList = {
   restaurants: [
     {

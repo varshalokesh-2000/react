@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ResturantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
+import useUserOnlineStatus from "../utils/useUserOnlineStatus";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -23,6 +24,15 @@ const Body = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const userOnlineStatus = useUserOnlineStatus();
+
+  if (!userOnlineStatus)
+    return (
+      <h1>
+        Looks like you are offline!! Please check your internet connection
+      </h1>
+    );
 
   return (
     <div className="body">
