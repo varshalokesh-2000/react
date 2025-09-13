@@ -2,40 +2,40 @@ import React from "react";
 
 class UserClass extends React.Component {
   constructor(props) {
-    // super props is needed to access the props inside the constructor
-    // as the component extends the React.Component class
-    // in order to use this.props
     super(props);
-    //contains all the state variables
     this.state = {
-      count: 0,
-      count2: 0,
+      userInfo: {
+        login: "Name here",
+        location: "Location here",
+      },
     };
-    console.log(this.props.name + "Child Constructor");
   }
 
-  componentDidMount() {
-    console.log(this.props.name + "Child ComponentDidMount");
+  async componentDidMount() {
+    const res = await fetch("https://api.github.com/users/VarshaML");
+    const json = await res.json();
+    this.setState({ userInfo: json });
+    console.log("componentDidMount");
   }
+
+  // called immediately after a component is inserted into the DOM
+  componentDidUpdate() {
+    console.log("componentDidUpdate");
+  }
+
+  // called before a component is removed from the DOM
+  componentWillUnmount() {
+    console.log("componentWillUnmount");
+  }
+
   render() {
-    console.log(this.props.name + "Child Render");
+    const { login, name, location, avatar_url } = this.state.userInfo;
     return (
       <div className="user-card">
-        <h1>
-          Class Component {this.state.count} {this.state.count2}{" "}
-        </h1>
-        <button
-          onClick={() => {
-            this.setState({ count: this.state.count + 1 });
-            // this.state.count = this.state.count + 1; won't work
-            // this.state.count++; won't work
-          }}
-        >
-          Increment Count
-        </button>
-        <h2>Name: {this.props.name}</h2>
+        <h2>Name: {login}</h2>
         <h3>Location: {this.props.location}</h3>
         <h2>Contact: 123456</h2>
+        <img src={avatar_url} alt={name} height={80} width={80} />
       </div>
     );
   }

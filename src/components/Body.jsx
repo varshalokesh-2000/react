@@ -19,18 +19,10 @@ const Body = () => {
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
-  console.log("Body rendered");
+
   useEffect(() => {
     fetchData();
   }, []);
-
-  //conditional rendering
-  //   if (listOfRestaurants.length === 0) {
-  //     //old practice
-  //     // return <h2>Loading...</h2>;
-  //     //shimmer ui - bets practice
-  //     return <Shimmer />;
-  //   }
 
   return (
     <div className="body">

@@ -50,6 +50,8 @@
   align-items: center;
   padding: 0px;
   width: 15.5rem;
+  text-decoration: none;
+  color: black;
   /* height: 400px; */
 }
 
@@ -128,4 +130,12 @@
   display: flex;
   gap: 10px;
   align-items: center;
+}
+
+.user-card {
+  padding: 15px;
+  border: 1px solid black;
+  margin: 5px;
+  border-radius: 8px;
+  cursor: pointer;
 }
