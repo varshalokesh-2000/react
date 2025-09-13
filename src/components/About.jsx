@@ -28,8 +28,8 @@ class About extends React.Component {
       <div>
         About
         <User name={"Varsha (functional component)"} />
-        <UserClass name={"Varsha"} location={"Shivamoga"} />
-        <UserClass name={"test"} location={"Shivamoga"} />
+        {/* <UserClass name={"Varsha"} location={"Shivamoga"} />
+        <UserClass name={"test"} location={"Shivamoga"} /> */}
       </div>
     );
   }

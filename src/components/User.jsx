@@ -1,7 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const User = ({ name }) => {
   const [count] = useState(0);
+
+  useEffect(async () => {
+    const id = setInterval(() => console.log("interval"), 1000);
+    console.log("componentDidMount inside useEffect");
+    return () => {
+      clearInterval(id);
+      console.log("componentWillUnmount inside useEffect");
+    };
+  }, []);
+
   return (
     <div className="user-card">
       <h1>count {count}</h1>
