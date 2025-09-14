@@ -1,5 +1,4 @@
 import { CMS_URL } from "../utils/constants";
-import { Link } from "react-router";
 
 const ResturantCard = (props) => {
   const {
@@ -16,18 +15,18 @@ const ResturantCard = (props) => {
     },
   } = props;
   return (
-    <Link className="rest-card" to={`/restaurants/` + id}>
-      <img className="rest-img" src={CMS_URL + cloudinaryImageId} />
-      <div>
-        <div className="rest-heading">{name}</div>
+    <div className="bg-white w-[250px] shadow-md rounded-lg transition ease-in delay-10  origin-center hover:scale-95">
+      <img className="rounded-t-lg" src={CMS_URL + cloudinaryImageId} />
+      <div className="p-2">
+        <div className="font-bold">{name}</div>
         <div className="rating">
-          <div>{avgRating} stars</div>
+          <div className="font-medium text-slate-500 ">{avgRating} stars</div>
           <div>{sla.slaString}</div>
         </div>
         <div className="cuisine">{cuisines.join(", ")}</div>
         <div>Cost for two: {costForTwo}</div>
       </div>
-    </Link>
+    </div>
   );
 };
 

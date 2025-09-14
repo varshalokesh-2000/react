@@ -17,7 +17,10 @@ const AppLayout = () => {
     <div className="app">
       <Header />
       {/* <Outlet /> is used to render the child routes and is replaced by the component specified in the path */}
-      <Outlet />
+
+      <div className="absolute mt-30">
+        <Outlet />
+      </div>
     </div>
   );
 };

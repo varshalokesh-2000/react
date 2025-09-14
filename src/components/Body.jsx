@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ResturantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import useUserOnlineStatus from "../utils/useUserOnlineStatus";
+import { Link } from "react-router";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -35,18 +36,19 @@ const Body = () => {
     );
 
   return (
-    <div className="body">
-      <div className="filter">
-        <div className="search">
+    <div className="p-4">
+      <div className="flex gap-2 mb-4">
+        <div className="flex gap-2">
           <input
             name="search"
             type="text"
-            className="search-box"
+            className="border rounded-md px-2"
             placeholder="Search"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
           <button
+            className="px-2 rounded-sm bg-green-200 cursor-pointer "
             onClick={() => {
               const filteredList = listOfRestaurants.filter((rest) =>
                 rest.info.name.toLowerCase().includes(searchText)
@@ -59,7 +61,7 @@ const Body = () => {
         </div>
         <div>
           <button
-            className="filter-btn"
+            className="bg-gray-200 px-3 py-1 rounded-sm cursor-pointer"
             onClick={() => {
               const filteredList = listOfRestaurants.filter(
                 (rest) => rest.info.avgRating > 4.3
@@ -75,9 +77,11 @@ const Body = () => {
         <Shimmer />
       ) : (
         <>
-          <div className="rest-container">
+          <div className="flex flex-wrap gap-2 ">
             {filteredRestaurants.map((rest) => (
-              <ResturantCard resData={rest} key={rest.info.id} />
+              <Link key={rest.info.id} to={`/restaurants/` + rest.info.id}>
+                <ResturantCard resData={rest} />
+              </Link>
             ))}
           </div>
         </>
