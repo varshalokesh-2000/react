@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 import Header from "./components/Header";
@@ -7,21 +7,36 @@ import Body from "./components/Body";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
+import UserContext from "./utils/UserContext";
 // import Grocery from "./components/Grocery";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 const About = lazy(() => import("./components/About"));
 
 const AppLayout = () => {
-  return (
-    <div className="app">
-      <Header />
-      {/* <Outlet /> is used to render the child routes and is replaced by the component specified in the path */}
+  const [userName, setUserName] = useState("");
 
-      <div className="mt-5">
-        <Outlet />
+  useEffect(() => {
+    //make an api call to get the username
+    const data = {
+      name: "Varsha M L",
+    };
+    setUserName(data.name);
+  }, []);
+
+  return (
+    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+      <div className="app">
+        {/* <UserContext.Provider value={{ loggedInUser: "Header User" }}> */}
+        {/* <Header /> uses "Header User" */}
+        <Header />
+        {/* </UserContext.Provider> */}
+        {/* <Outlet /> is used to render the child routes and is replaced by the component specified in the path */}
+        <div className="mt-5">
+          <Outlet />
+        </div>
       </div>
-    </div>
+    </UserContext.Provider>
   );
 };
 

@@ -13,14 +13,14 @@ const User = ({ name }) => {
   //   };
   // }, []);
 
-  useEffect(() => {
-    const id = setInterval(() => console.log("interval"), 1000);
-    console.log("componentDidMount inside useEffect");
-    return () => {
-      clearInterval(id);
-      console.log("componentWillUnmount inside useEffect");
-    };
-  }, []);
+  // useEffect(() => {
+  //   const id = setInterval(() => console.log("interval"), 1000);
+  //   console.log("componentDidMount inside useEffect");
+  //   return () => {
+  //     clearInterval(id);
+  //     console.log("componentWillUnmount inside useEffect");
+  //   };
+  // }, []);
 
   return (
     <div className="user-card">

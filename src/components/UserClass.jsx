@@ -15,20 +15,20 @@ class UserClass extends React.Component {
     const res = await fetch("https://api.github.com/users/VarshaML");
     const json = await res.json();
     this.setState({ userInfo: json });
-    console.log("componentDidMount");
-    this.timer = setInterval(() => console.log("interval"), 1000);
+    // console.log("componentDidMount");
+    // this.timer = setInterval(() => console.log("interval"), 1000);
   }
 
   // called immediately after a component is inserted into the DOM
   componentDidUpdate() {
-    console.log("componentDidUpdate");
+    // console.log("componentDidUpdate");
   }
 
   // called before a component is removed from the DOM
   componentWillUnmount() {
-    console.log("componentWillUnmount");
-    //clear interval
-    clearInterval(this.timer);
+    // console.log("componentWillUnmount");
+    // //clear interval
+    // clearInterval(this.timer);
   }
 
   render() {

@@ -1,6 +1,7 @@
 import React from "react";
 import User from "./User";
 import UserClass from "./UserClass";
+import UserContext from "../utils/UserContext";
 
 // const About = () => {
 //   return (
@@ -30,6 +31,14 @@ class About extends React.Component {
         <User name={"Varsha (functional component)"} />
         {/* <UserClass name={"Varsha"} location={"Shivamoga"} />
         <UserClass name={"test"} location={"Shivamoga"} /> */}
+        <UserContext.Consumer>
+          {(data) => (
+            <div className="mt-2 mx-2 border-1 border-black p-2">
+              {console.log(data, "=============")}
+              <UserClass name={data?.loggedInUser} location={"Shivamoga"} />
+            </div>
+          )}
+        </UserContext.Consumer>
       </div>
     );
   }

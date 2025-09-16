@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ResturantCard, { withOffersLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import useUserOnlineStatus from "../utils/useUserOnlineStatus";
 import { Link } from "react-router";
 import { RESTURANT_LIST } from "../utils/constants";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   const fetchData = async () => {
     const data = await fetch(RESTURANT_LIST);
@@ -72,6 +75,17 @@ const Body = () => {
           >
             Top Rated Restaurants
           </button>
+        </div>
+        <div className="p-2 flex items-center gap-2">
+          UserName:
+          <input
+            className="border rounded-md p-1"
+            value={loggedInUser}
+            onChange={(e) => {
+              e.preventDefault();
+              setUserName(e.target.value);
+            }}
+          />
         </div>
       </div>
       {filteredRestaurants.length === 0 ? (
