@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import ResturantCard from "./RestaurantCard";
+import ResturantCard, { withOffersLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import useUserOnlineStatus from "../utils/useUserOnlineStatus";
 import { Link } from "react-router";
+import { RESTURANT_LIST } from "../utils/constants";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -10,9 +11,7 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch(RESTURANT_LIST);
     const json = await data.json();
     setListOfRestaurants(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -34,6 +33,8 @@ const Body = () => {
         Looks like you are offline!! Please check your internet connection
       </h1>
     );
+
+  const ResturantCardWithOfferLabel = withOffersLabel(ResturantCard);
 
   return (
     <div className="p-4">
@@ -80,7 +81,11 @@ const Body = () => {
           <div className="flex flex-wrap gap-2 ">
             {filteredRestaurants.map((rest) => (
               <Link key={rest.info.id} to={`/restaurants/` + rest.info.id}>
-                <ResturantCard resData={rest} />
+                {rest.info.aggregatedDiscountInfoV3?.header ? (
+                  <ResturantCardWithOfferLabel resData={rest} />
+                ) : (
+                  <ResturantCard resData={rest} />
+                )}
               </Link>
             ))}
           </div>

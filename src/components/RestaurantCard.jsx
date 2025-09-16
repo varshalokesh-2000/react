@@ -30,4 +30,23 @@ const ResturantCard = (props) => {
   );
 };
 
+//Higher order component
+//input - ResturantCard => output - ResturantCardWithOffers
+
+export const withOffersLabel = (ResturantCard) => {
+  return (props) => {
+    const aggregatedDiscountInfoV3 =
+      props?.resData?.info?.aggregatedDiscountInfoV3;
+    return (
+      <>
+        <div className="absolute uppercase text-slate-50 text-2xl font-bold ">
+          {aggregatedDiscountInfoV3?.header}{" "}
+          {aggregatedDiscountInfoV3?.subHeader}
+        </div>
+        <ResturantCard {...props} />
+      </>
+    );
+  };
+};
+
 export default ResturantCard;
