@@ -22,6 +22,9 @@ const Body = () => {
     setFilteredRestaurants(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
+    console.log(
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
 
   useEffect(() => {
@@ -38,7 +41,7 @@ const Body = () => {
     );
 
   const ResturantCardWithOfferLabel = withOffersLabel(ResturantCard);
-
+  console.log({ filteredRestaurants });
   return (
     <div className="p-4">
       <div className="flex gap-2 mb-4">
@@ -88,13 +91,14 @@ const Body = () => {
           />
         </div>
       </div>
-      {filteredRestaurants.length === 0 ? (
+      {filteredRestaurants?.length === 0 ? (
         <Shimmer />
       ) : (
         <>
           <div className="flex flex-wrap gap-2 ">
-            {filteredRestaurants.map((rest) => (
+            {filteredRestaurants?.map((rest) => (
               <Link key={rest.info.id} to={`/restaurants/` + rest.info.id}>
+                {console.log({ rest })}
                 {rest.info.aggregatedDiscountInfoV3?.header ? (
                   <ResturantCardWithOfferLabel resData={rest} />
                 ) : (

@@ -1,7 +1,15 @@
+import { useDispatch } from "react-redux";
 import { CMS_URL } from "../utils/constants";
+import { addItem } from "../utils/cartSlice";
 
 const CategoryItemList = ({ items }) => {
-  console.log({ items });
+  const dispatch = useDispatch();
+
+  const handleAddItem = (item) => {
+    //dispatch an action
+    dispatch(addItem(item));
+  };
+
   return (
     <div>
       {items?.map((item) => (
@@ -30,7 +38,10 @@ const CategoryItemList = ({ items }) => {
             />
             <div className="relative left-[35%] bottom-[20px] z-10">
               <div className="absolute">
-                <button className="cursor-pointer border-1 border-gray-400 py-1 px-2 rounded-md bg-white text-green-600 font-medium">
+                <button
+                  onClick={() => handleAddItem(item)}
+                  className="cursor-pointer border-1 border-gray-400 py-1 px-2 rounded-md bg-white text-green-600 font-medium"
+                >
                   Add +
                 </button>
               </div>

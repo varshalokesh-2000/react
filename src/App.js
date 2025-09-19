@@ -8,6 +8,9 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import CartInfo from "./components/CartInfo";
 // import Grocery from "./components/Grocery";
 
 const Grocery = lazy(() => import("./components/Grocery"));
@@ -25,18 +28,20 @@ const AppLayout = () => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
-      <div className="app">
-        {/* <UserContext.Provider value={{ loggedInUser: "Header User" }}> */}
-        {/* <Header /> uses "Header User" */}
-        <Header />
-        {/* </UserContext.Provider> */}
-        {/* <Outlet /> is used to render the child routes and is replaced by the component specified in the path */}
-        <div className="mt-5">
-          <Outlet />
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <div className="app">
+          {/* <UserContext.Provider value={{ loggedInUser: "Header User" }}> */}
+          {/* <Header /> uses "Header User" */}
+          <Header />
+          {/* </UserContext.Provider> */}
+          {/* <Outlet /> is used to render the child routes and is replaced by the component specified in the path */}
+          <div className="mt-5">
+            <Outlet />
+          </div>
         </div>
-      </div>
-    </UserContext.Provider>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -74,6 +79,10 @@ const appRouter = createBrowserRouter([
             <Grocery />
           </Suspense>
         ),
+      },
+      {
+        path: "/cart",
+        element: <CartInfo />,
       },
     ],
   },
