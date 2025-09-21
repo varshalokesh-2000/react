@@ -32,7 +32,7 @@ describe("Contact Us page component test", () => {
     //Querying
     const inputs = screen.getAllByRole("textbox");
     //console will log the react elements - virtual dom
-    console.log(inputs);
+    // console.log(inputs);
     expect(inputs).toHaveLength(2);
   });
 });

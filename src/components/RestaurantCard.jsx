@@ -14,6 +14,7 @@ const ResturantCard = (props) => {
       },
     },
   } = props;
+  console.log({ props });
   return (
     <div className="bg-white w-[250px] shadow-md rounded-lg transition ease-in delay-10  origin-center hover:scale-95">
       <img className="rounded-t-lg" src={CMS_URL + cloudinaryImageId} />
